@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template, request
 from flask_sockets import Sockets
+from wifi import Cell, Scheme
 import json
 import serial
 
@@ -114,6 +115,21 @@ def reset():
 @app.route("/admin")
 def admin():
     return render_template('admin.html')
+
+@app.route("/admin/wifi")
+@app.route("/admin/wifi/<network>")
+def wifi(network=None):
+    if network:
+        ssid = network
+        pw = request.data
+        #Connect to network here
+    else:
+        #Get list of WiFi networks, print here
+        #list = Cell.all('wlan0')
+        wirelesslist = []
+        for i in list:
+            wirelesslist.append(i.ssid)
+        return json.dumps(["BlendTec1","CustomerWifi","BillWiTheScienceFi"])
 
 if __name__ == "__main__":
     from gevent import pywsgi

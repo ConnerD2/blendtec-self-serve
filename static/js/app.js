@@ -1,4 +1,5 @@
 var flavor = new Object();
+
 flavor.blend = 0;
 flavor.ice = 0;
 flavor.water = 0;
@@ -198,6 +199,16 @@ function clean(){
 function reset(){
     $.get("/reset");
 }
+
+$(document).ready(function () {
+    if(window.location.href.indexOf("admin") > -1) {
+        $.get( "/admin/wifi", function( data ) {
+            console.log(data);
+            $('select').material_select();
+        });
+    }
+});
+
 
 document.addEventListener("DOMContentLoaded", function() {
     var lastElementClicked;
