@@ -1,3 +1,16 @@
+var flavor = new Object();
+flavor.blend = 0;
+flavor.ice = 0;
+flavor.water = 0;
+flavor.flavor0 = ["flavor0",0];
+flavor.flavor1 = ["flavor1",0];
+flavor.flavor2 = ["flavor2",0];
+flavor.flavor3 = ["flavor3",0];
+flavor.flavor4 = ["flavor4",0];
+flavor.flavor5 = ["flavor5",0];
+flavor.flavor6 = ["flavor6",0];
+flavor.flavor7 = ["flavor7",0];
+
 function make() {
     $.get("/make");
 }
@@ -8,7 +21,67 @@ function cancel(){
     $.get("/cancel");
 }
 //Flavor Selection Handlers
+function addBanana() {
+    flavor.flavor0[1] += 1;
+}
 
+function addWatermelon() {
+    flavor.flavor1[1] += 1;
+}
+
+function addMango() {
+    flavor.flavor2[1] += 1;
+}
+
+function addStrawberry() {
+    flavor.flavor3[1] += 1;
+}
+
+function addPineapple() {
+    flavor.flavor4[1] += 1;
+}
+
+function setBloomingBerry(){
+    flavor.blend = 0;
+    flavor.ice = 0;
+    flavor.water = 0;
+    flavor.flavor0 = ["flavor0",0];
+    flavor.flavor1 = ["flavor1",0];
+    flavor.flavor2 = ["flavor2",0];
+    flavor.flavor3 = ["flavor3",0];
+    flavor.flavor4 = ["flavor4",0];
+    flavor.flavor5 = ["flavor5",0];
+    flavor.flavor6 = ["flavor6",0];
+    flavor.flavor7 = ["flavor7",0];
+}
+
+function setHarvestGreens(){
+    flavor.blend = 0;
+    flavor.ice = 0;
+    flavor.water = 0;
+    flavor.flavor0 = ["flavor0",0];
+    flavor.flavor1 = ["flavor1",0];
+    flavor.flavor2 = ["flavor2",0];
+    flavor.flavor3 = ["flavor3",0];
+    flavor.flavor4 = ["flavor4",0];
+    flavor.flavor5 = ["flavor5",0];
+    flavor.flavor6 = ["flavor6",0];
+    flavor.flavor7 = ["flavor7",0];
+}
+
+function setSuperfruit(){
+    flavor.blend = 0;
+    flavor.ice = 0;
+    flavor.water = 0;
+    flavor.flavor0 = ["flavor0",0];
+    flavor.flavor1 = ["flavor1",0];
+    flavor.flavor2 = ["flavor2",0];
+    flavor.flavor3 = ["flavor3",0];
+    flavor.flavor4 = ["flavor4",0];
+    flavor.flavor5 = ["flavor5",0];
+    flavor.flavor6 = ["flavor6",0];
+    flavor.flavor7 = ["flavor7",0];
+}
 
 function setflavor(){
     //Populate from flavor selections
@@ -29,83 +102,83 @@ function reset(){
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  var lastElementClicked;
-  var PrevLink = document.querySelector('a.prev');
-  var NextLink = document.querySelector('a.next');
+    var lastElementClicked;
+    var PrevLink = document.querySelector('a.prev');
+    var NextLink = document.querySelector('a.next');
 
-  Barba.Pjax.init();
-  Barba.Prefetch.init();
+    Barba.Pjax.init();
+    Barba.Prefetch.init();
 
-  Barba.Dispatcher.on('linkClicked', function(el) {
-    lastElementClicked = el;
-  });
+    Barba.Dispatcher.on('linkClicked', function(el) {
+        lastElementClicked = el;
+    });
 
-  var MovePage = Barba.BaseTransition.extend({
-    start: function() {
-      this.originalThumb = lastElementClicked;
+    var MovePage = Barba.BaseTransition.extend({
+        start: function() {
+            this.originalThumb = lastElementClicked;
 
-      Promise
-        .all([this.newContainerLoading, this.scrollTop()])
-        .then(this.movePages.bind(this));
-    },
-
-    scrollTop: function() {
-      var deferred = Barba.Utils.deferred();
-      var obj = { y: window.pageYOffset };
-
-      TweenLite.to(obj, 0.4, {
-        y: 0,
-        onUpdate: function() {
-          if (obj.y === 0) {
-            deferred.resolve();
-          }
-
-          window.scroll(0, obj.y);
+            Promise
+                .all([this.newContainerLoading, this.scrollTop()])
+                .then(this.movePages.bind(this));
         },
-        onComplete: function() {
-          deferred.resolve();
+
+        scrollTop: function() {
+            var deferred = Barba.Utils.deferred();
+            var obj = { y: window.pageYOffset };
+
+            TweenLite.to(obj, 0.4, {
+                y: 0,
+                onUpdate: function() {
+                    if (obj.y === 0) {
+                        deferred.resolve();
+                    }
+
+                    window.scroll(0, obj.y);
+                },
+                onComplete: function() {
+                    deferred.resolve();
+                }
+            });
+
+            return deferred.promise;
+        },
+
+        movePages: function() {
+            var _this = this;
+            var goingForward = true;
+            this.updateLinks();
+
+            if (this.getNewPageFile() === this.oldContainer.dataset.prev) {
+                goingForward = false;
+            }
+
+            TweenLite.set(this.newContainer, {
+                visibility: 'visible',
+                xPercent: goingForward ? 100 : -100,
+                position: 'fixed',
+                left: 0,
+                top: 0,
+                right: 0
+            });
+
+            TweenLite.to(this.oldContainer, 0.6, { xPercent: goingForward ? -100 : 100 });
+            TweenLite.to(this.newContainer, 0.6, { xPercent: 0, onComplete: function() {
+                TweenLite.set(_this.newContainer, { clearProps: 'all' });
+                _this.done();
+            }});
+        },
+
+        updateLinks: function() {
+            PrevLink.href = this.newContainer.dataset.prev;
+            NextLink.href = this.newContainer.dataset.next;
+        },
+
+        getNewPageFile: function() {
+            return Barba.HistoryManager.currentStatus().url.split('/').pop();
         }
-      });
+    });
 
-      return deferred.promise;
-    },
-
-    movePages: function() {
-      var _this = this;
-      var goingForward = true;
-      this.updateLinks();
-
-      if (this.getNewPageFile() === this.oldContainer.dataset.prev) {
-        goingForward = false;
-      }
-
-      TweenLite.set(this.newContainer, {
-        visibility: 'visible',
-        xPercent: goingForward ? 100 : -100,
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        right: 0
-      });
-
-      TweenLite.to(this.oldContainer, 0.6, { xPercent: goingForward ? -100 : 100 });
-      TweenLite.to(this.newContainer, 0.6, { xPercent: 0, onComplete: function() {
-        TweenLite.set(_this.newContainer, { clearProps: 'all' });
-        _this.done();
-      }});
-    },
-
-    updateLinks: function() {
-      PrevLink.href = this.newContainer.dataset.prev;
-      NextLink.href = this.newContainer.dataset.next;
-    },
-
-    getNewPageFile: function() {
-      return Barba.HistoryManager.currentStatus().url.split('/').pop();
-    }
-  });
-
-  Barba.Pjax.getTransition = function() {
-    return MovePage;
-  };
+    Barba.Pjax.getTransition = function() {
+        return MovePage;
+    };
 });
