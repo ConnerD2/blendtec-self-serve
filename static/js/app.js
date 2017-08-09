@@ -200,10 +200,24 @@ function reset(){
     $.get("/reset");
 }
 
+function adminauth(){
+    pw = $("").value
+    actual = "Complex123";
+    if(pw == actual){
+        window.location.href = "/admin";
+    }
+    else {
+        window.location.href = "/";
+    }
+}
+
 $(document).ready(function () {
     if(window.location.href.indexOf("admin") > -1) {
-        $.get( "/admin/wifi", function( data ) {
-            console.log(data);
+        $.get( "/admin/wifi", function( datax ) {
+            data = JSON.parse(datax);
+            for (var i = 0, len = data.length; i < len; i++) {
+                $('select').append(`<option value="${data[i]}">${data[i]}</option>`);
+            }
             $('select').material_select();
         });
     }

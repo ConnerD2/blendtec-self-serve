@@ -14,8 +14,8 @@ if "Ready for service" in x:
 else:
     ready = False
 
-flavor = {}
-health = None
+smflavor = {}
+smhealth = None
 
 app = Flask(__name__)
 sockets = Sockets(app)
@@ -60,6 +60,8 @@ def complete():
 def sel_flavor():
     if request.method == 'POST':
         flavor = request.get_json(force=True)
+        global smflavor
+        smflavor = flavor
         return "Set Flavor to: " + str(flavor)
     else:
         return str(flavor)
@@ -68,20 +70,24 @@ def sel_flavor():
 def set_health():
     if request.method == 'POST':
         localhealth = request.get_json(force=True)
+        global smhealth
         if localhealth['health'] == "yes":
-            health = True
+            smhealth = True
         if localhealth['health'] == "no":
-            health = False
-        return "Set Health to: " + str(health)
+            smhealth = False
+        return "Set Health to: " + str(smhealth)
     else:
         return health
 
 @app.route("/make")
 def make():
-    ser.write('M')
-    # Parse Flavor Array here (flavor)
-    ser.write()
-    return "{ 'status' : ''}"
+    #ser.write('M')
+    global smflavor
+    global smhealth
+    print json.dumps(smflavor)
+    print smhealth
+    #ser.write()
+    return "OK"
 
 @app.route("/take")
 def take():
@@ -125,10 +131,10 @@ def wifi(network=None):
         #Connect to network here
     else:
         #Get list of WiFi networks, print here
-        #list = Cell.all('wlan0')
-        wirelesslist = []
-        for i in list:
-            wirelesslist.append(i.ssid)
+        #iwlist = Cell.all('wlan0')
+        #wirelesslist = []
+        #for i in iwlist:
+        #    wirelesslist.append(i.ssid)
         return json.dumps(["BlendTec1","CustomerWifi","BillWiTheScienceFi"])
 
 if __name__ == "__main__":

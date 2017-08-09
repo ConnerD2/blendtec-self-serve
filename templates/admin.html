@@ -1,18 +1,28 @@
 {% extends "layout.html" %}
 {% block body %}
 <div id="admin" href="#admin">
-    <h1> Super Secret Admin Controls </h1>
-    <form>
-        Wireless Networks:
-        <div class="input-field">
-            <select id="wireless">
-            </select>
-        </div>
-        <div class="input-field">
-            <i class="material-icons prefix">vpn_key</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">Password</label>
-        </div>
-    </form>
+    <div class="row">
+        <h1> Super Secret Admin Controls </h1>
+    </div>
+    <div class="row">
+        <form>
+            Wireless Networks:
+            <div class="input-field">
+                <select id="wireless">
+                </select>
+            </div>
+            <div class="input-field">
+                <i class="material-icons prefix">vpn_key</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Password</label>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <h2> Credit Card Handling </h2>
+    </div>
+    <div class="row">
+        <h2> Flavor Status </h2>
+    </div>
 </div>
 {% endblock %}
