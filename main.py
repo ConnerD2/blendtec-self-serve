@@ -16,10 +16,10 @@ DATABASE = {
 DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
-#ser = serial.Serial('/dev/ttyUSB0')
-#ser.write('I')
-#x = ser.readline()
-x = "Ready for service"
+ser = serial.Serial('/dev/pts/1')
+ser.write('I')
+x = ser.readline()
+#x = "Ready for service"
 if "Ready for service" in x:
     ready = True
 else:
@@ -135,42 +135,42 @@ def set_health():
 
 @app.route("/make")
 def make():
-    #ser.write('M')
+    ser.write('M')
     global smflavor
     global smhealth
     smtot = smflavor['ice'] + smflavor['water'] + smflavor['flavor0'][1] + smflavor['flavor1'][1] + smflavor['flavor2'][1] + smflavor['flavor3'][1] + smflavor['flavor4'][1] + smflavor['flavor5'][1] + smflavor['flavor6'][1] + smflavor['flavor7'][1]
     print json.dumps(smflavor)
     print smhealth
     #Write out Blend
-    ser.write(smflavor['blend'])
+    ser.write(str(smflavor['blend']) + '\n')
     #Write out Ice
-    ser.write(smflavor['ice']/(1.0 * smtot))
+    ser.write(str(smflavor['ice']/(1.0 * smtot)) + '\n')
     #Write out Water
-    ser.write(smflavor['water']/(1.0 * smtot))
+    ser.write(str(smflavor['water']/(1.0 * smtot)) + '\n')
     #Write out flavor0
-    ser.write(smflavor['flavor0'][0])
-    ser.write(smflavor['flavor0'][1]/(1.0 * smtot))
+    ser.write(smflavor['flavor0'][0].encode('ascii', 'ignore') + '\n')
+    ser.write(str(smflavor['flavor0'][1]/(1.0 * smtot)) + '\n')
     #Write out flavor1
-    ser.write(smflavor['flavor1'][0])
-    ser.write(smflavor['flavor1'][1]/(1.0 * smtot))
+    ser.write(smflavor['flavor1'][0].encode('ascii', 'ignore') + '\n')
+    ser.write(str(smflavor['flavor1'][1]/(1.0 * smtot)) + '\n')
     #Write out flavor2
-    ser.write(smflavor['flavor2'][0])
-    ser.write(smflavor['flavor2'][1]/(1.0 * smtot))
+    ser.write(smflavor['flavor2'][0].encode('ascii', 'ignore') + '\n')
+    ser.write(str(smflavor['flavor2'][1]/(1.0 * smtot)) + '\n')
     #Write out flavor3
-    ser.write(smflavor['flavor3'][0])
-    ser.write(smflavor['flavor3'][1]/(1.0 *  smtot))
+    ser.write(smflavor['flavor3'][0].encode('ascii', 'ignore') + '\n')
+    ser.write(str(smflavor['flavor3'][1]/(1.0 *  smtot)) + '\n')
     #Write out flavor4
-    ser.write(smflavor['flavor4'][0])
-    ser.write(smflavor['flavor4'][1]/(1.0 * smtot))
+    ser.write(smflavor['flavor4'][0].encode('ascii', 'ignore') + '\n')
+    ser.write(str(smflavor['flavor4'][1]/(1.0 * smtot)) + '\n')
     #Write out flavor5
-    ser.write(smflavor['flavor5'][0])
-    ser.write(smflavor['flavor5'][1]/(1.0 * smtot))
+    ser.write(smflavor['flavor5'][0].encode('ascii', 'ignore') + '\n')
+    ser.write(str(smflavor['flavor5'][1]/(1.0 * smtot)) + '\n')
     #Write out flavor6
-    ser.write(smflavor['flavor6'][0])
-    ser.write(smflavor['flavor6'][1]/(1.0 * smtot))
+    ser.write(smflavor['flavor6'][0].encode('ascii', 'ignore') + '\n')
+    ser.write(str(smflavor['flavor6'][1]/(1.0 * smtot)) + '\n')
     #Write out flavor7
-    ser.write(smflavor['flavor7'][0])
-    ser.write(smflavor['flavor7'][1]/(1.0 * smtot))
+    ser.write(smflavor['flavor7'][0].encode('ascii', 'ignore') + '\n')
+    ser.write(str(smflavor['flavor7'][1]/(1.0 * smtot)) + '\n')
     k = ser.readline()
     print k
     return "OK"
@@ -183,26 +183,26 @@ def take():
 @app.route("/rinse")
 def rinse():
     ser.write('D')
-    return "{ 'status' : ''}"
+    return "OK"
 
 @app.route("/clean")
 def clean():
     ser.write('C')
-    return "{ 'status' : '' }"
+    return "OK"
 
 @app.route("/cancel")
 def cancel():
     flavor = {}
     health = None
     ser.write('X')
-    return "{ 'status' : '' }"
+    return "OK"
 
 @app.route("/reset")
 def reset():
     flavor = {}
     health = None
     ser.write('R')
-    return "{ 'status' : ''}"
+    return "OK"
 
 @app.route("/admin")
 def admin():
