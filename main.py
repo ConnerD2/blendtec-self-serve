@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template, request
 from flask_sockets import Sockets
+import json
 import serial
 
 #ser = serial.Serial('/dev/ttyUSB0')
@@ -58,15 +59,19 @@ def complete():
 def sel_flavor():
     if request.method == 'POST':
         flavor = request.get_json(force=True)
-        return "Set Flavor to: " + flavor
+        return "Set Flavor to: " + str(flavor)
     else:
-        return flavor
+        return str(flavor)
 
 @app.route("/sethealth", methods=['GET','POST'])
 def set_health():
     if request.method == 'POST':
-        health = request.get_json(force=True)
-        return "Set Health to: " + health
+        localhealth = request.get_json(force=True)
+        if localhealth['health'] == "yes":
+            health = True
+        if localhealth['health'] == "no":
+            health = False
+        return "Set Health to: " + str(health)
     else:
         return health
 

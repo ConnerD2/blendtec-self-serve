@@ -1,38 +1,47 @@
 {% extends "layout.html" %}
 {% block body %}
 <div id="selection" href="#select"> <!-- Selection Page -->
-                    <div class="row"><!-- Fill Your Cup and Cup with graphics -->
-                        <center>
-                            <h2> Fill Your Cup </h2>
-                            <img src="{{ url_for('static', filename='assets/icon_cup_larger.png') }}" />
-                            <hr>
-                            <h3> Select Ingredients </h3>
-                        </center>
-                    </div>
-                    <div class="row"> <!-- Ingredient Selection -->
-                        <h4> Individual </h4>
-                        <div class="col center-align" onclick="addBanana()"><img src="{{ url_for('static', filename='assets/icon_cup_banana.png') }}" /> Sunny Banana</div>
-                        <div class="col center-align" onclick="addWatermelon()"><img src="{{ url_for('static', filename='assets/icon_cup_watermelon.png') }}" /> Wild Watermelon</div>
-                        <div class="col center-align" onclick="addMango()"><img src="{{ url_for('static', filename='assets/icon_cup_mango.png') }}" /> Mellow Mango</div>
-                        <div class="col center-align" onclick="addStrawberry()"><img src="{{ url_for('static', filename='assets/icon_cup_strawberry.png') }}" /> Summer Strawberry</div>
-                        <div class="col center-align" onclick="addPineapple()"><img src="{{ url_for('static', filename='assets/icon_cup_pineapple.png') }}" /> Pure Pineapple</div>
-                    </div>
-                    <div class="row"> <!-- Pre-Blends -->
-                        <h4> Pre-Blends </h4>
-                        <div class="col s4 center-align" onclick="setBloomingBerry()"><img src="{{ url_for('static', filename='assets/icon_cup_blooming_berry.png') }}" /> Blooming Berry</div>
-                        <div class="col s4 center-align" onclick="setHarvestGreens()"><img src="{{ url_for('static', filename='assets/icon_cup_harvest_green.png') }}" /> Harvest Greens</div>
-                        <div class="col s4 center-align" onclick="setSuperfruit()"><img src="{{ url_for('static', filename='assets/icon_cup_superfruit.png') }}" /> Superfruit All-Star</div>
-                    </div>
-                    <div class="row"> <!-- Controls -->
-                        <div class="col s4 center-align">
-                            <a class="waves-effect waves-light btn-large" onclick="resetrecipe()"><i class="material-icons left">autorenew</i>Reset</a>
-                        </div>
-                        <div class="col s4 center-align">
-                            <a style="margin: auto;" class="waves-effect waves-light btn-large" onclick="sendrecipe()" href="/health"><i class="material-icons left">whatshot</i>Onward!</a>
-                        </div>
-                        <div class="col s4 center-align">
-                            <a class="waves-effect waves-light btn-large" href="/"><i class="material-icons left">block</i>Cancel</a>
-                        </div>
-                    </div>
+    <div class="row"><!-- Fill Your Cup and Cup with graphics -->
+        <center>
+            <h2> Fill Your Cup </h2>
+            <div class="cup">
+                <img src="{{ url_for('static', filename='assets/icon_cup_larger.png') }}" />
+                <div id="ingredients">
+                    <p id="none">No Ingredients Yet! Add Some!</p>
+                    <table>
+                        <tbody id="ingredientsbody">
+                        </tbody>
+                    </table>
                 </div>
+            </div>
+            <hr>
+            <h3> Select Ingredients </h3>
+        </center>
+    </div>
+    <div class="row"> <!-- Ingredient Selection -->
+        <h4> Individual </h4>
+        <div class="col center-align" onclick="addBanana()"><img src="{{ url_for('static', filename='assets/icon_cup_banana.png') }}" /> Sunny Banana</div>
+        <div class="col center-align" onclick="addWatermelon()"><img src="{{ url_for('static', filename='assets/icon_cup_watermelon.png') }}" /> Wild Watermelon</div>
+        <div class="col center-align" onclick="addMango()"><img src="{{ url_for('static', filename='assets/icon_cup_mango.png') }}" /> Mellow Mango</div>
+        <div class="col center-align" onclick="addStrawberry()"><img src="{{ url_for('static', filename='assets/icon_cup_strawberry.png') }}" /> Summer Strawberry</div>
+        <div class="col center-align" onclick="addPineapple()"><img src="{{ url_for('static', filename='assets/icon_cup_pineapple.png') }}" /> Pure Pineapple</div>
+    </div>
+    <div class="row"> <!-- Pre-Blends -->
+        <h4> Pre-Blends </h4>
+        <div class="col s4 center-align" onclick="setBloomingBerry()"><img src="{{ url_for('static', filename='assets/icon_cup_blooming_berry.png') }}" /> Blooming Berry</div>
+        <div class="col s4 center-align" onclick="setHarvestGreens()"><img src="{{ url_for('static', filename='assets/icon_cup_harvest_green.png') }}" /> Harvest Greens</div>
+        <div class="col s4 center-align" onclick="setSuperfruit()"><img src="{{ url_for('static', filename='assets/icon_cup_superfruit.png') }}" /> Superfruit All-Star</div>
+    </div>
+    <div class="row"> <!-- Controls -->
+        <div class="col s4 center-align">
+            <a class="waves-effect waves-light btn-large" onclick="resetrecipe()"><i class="material-icons left">autorenew</i>Reset</a>
+        </div>
+        <div class="col s4 center-align">
+            <a style="margin: auto;" class="waves-effect waves-light btn-large" onclick="setflavor()" href="/health"><i class="material-icons left">whatshot</i>Onward!</a>
+        </div>
+        <div class="col s4 center-align">
+            <a class="waves-effect waves-light btn-large" href="/"><i class="material-icons left">block</i>Cancel</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
