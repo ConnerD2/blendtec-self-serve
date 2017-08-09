@@ -1,64 +1,21 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}" media="screen,projection"/>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-        <title>Blendtec Smoothie Machine</title>
-        <!-- TODO: Move this to its own CSS file -->
-        <style>
-            body {
-                background-color:#269;
-                background-image: linear-gradient(transparent 2px, transparent 2px),
-                linear-gradient(90deg, transparent 2px, transparent 2px),
-                linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-                background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
-                background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
-                color: white;
-            }
-            html, body, .container {
-                height: 100%;
-            }
-            .container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        </style>
-    </head>
-
-    <body>
-        <!-- Main Container -->
-        <div class="container barba-wrapper">
-            <!-- Rotating Carousel -->
-            <div class="barba-container">
-                <div id="blending" href="#blending"> <!-- During Blend Page -->
-                    <div class="row">
-                        <!-- Show Computed Good Things here -->
-                    </div>
-                    <div class="row">
-                        <div class="preloader-wrapper big active">
-                            <div class="spinner-layer spinner-blue">
-                                <div class="circle-clipper left">
-                                    <div class="circle"></div>
-                                    </div><div class="gap-patch">
-                                    <div class="circle"></div>
-                                    </div><div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{% extends "layout.html" %}
+{% block body %}
+<div id="blending" href="#blending"> <!-- During Blend Page -->
+    <div class="row">
+        <!-- Show Computed Good Things here -->
+    </div>
+    <div class="row">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                    </div><div class="gap-patch">
+                    <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                    <div class="circle"></div>
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/barba.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/TweenMax.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
-    </body>
-</html>
+    </div>
+</div>
+{% endblock %}
