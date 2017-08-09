@@ -35,28 +35,36 @@
         <div class="container barba-wrapper">
             <!-- Rotating Carousel -->
             <div class="barba-container">
-                <div id="start" href="#start"> <!-- Start Page -->
-                    <div class="row"><!-- Main Self Serve Row -->
-                        <div class="col s7"><img src="{{ url_for('static', filename='assets/icon_cup_smaller.png')}}" /></div><!-- Cup Logo -->
-                        <div class="col s5"><h2> Self Serve </h2><h4> by Blendtec </h4></div><!-- SelfServe By Blendtec -->
-                    </div>
-                    <br>
-                    <br>
-                    <div class="divider"></div>
-                    <br>
-                    <br>
-                    <div class="row"><!-- 3x4 Sponsor Grid -->
-                        <img src="{{ url_for('static',filename='assets/product_icons.png') }}" />
-                    </div>
-                    <br>
-                    <br>
-                    <div class="divider"></div>
-                    <br>
-                    <br>
-                    <div class="row"> <!-- Start Blending Button -->
+                <div id="selection" href="#select"> <!-- Selection Page -->
+                    <div class="row"><!-- Fill Your Cup and Cup with graphics -->
                         <center>
-                            <a style="margin: auto;" class="waves-effect waves-light btn-large" href="/selection"><i class="material-icons left">whatshot</i>Start Blending!</a>
+                            <h2> Fill Your Cup </h2>
+                            <img src="{{ url_for('static', filename='assets/icon_cup_larger.png') }}" />
+                            <hr>
+                            <h3> Select Ingredients </h3>
                         </center>
+                    </div>
+                    <div class="row"> <!-- Ingredient Selection -->
+                        <h4> Individual </h4>
+                        <div class="col s2"><img src="{{ url_for('static', filename='assets/icon_cup_banana.png') }}" /></div>
+                        <div class="col s2"><img src="{{ url_for('static', filename='assets/icon_cup_watermelon.png') }}" /></div>
+                        <div class="col s2"><img src="{{ url_for('static', filename='assets/icon_cup_mango.png') }}" /></div>
+                        <div class="col s2"><img src="{{ url_for('static', filename='assets/icon_cup_strawberry.png') }}" /></div>
+                        <div class="col s2"><img src="{{ url_for('static', filename='assets/icon_cup_pineapple.png') }}" /></div>
+                    </div>
+                    <div class="row"> <!-- Pre-Blends -->
+
+                    </div>
+                    <div class="row"> <!-- Controls -->
+                        <div class="col s4">
+                            <a class="waves-effect waves-light btn-large"><i class="material-icons left">autorenew</i>Reset</a>
+                        </div>
+                        <div class="col s4">
+                            <a style="margin: auto;" class="waves-effect waves-light btn-large" onclick="sendrecipe()"><i class="material-icons left">whatshot</i>Start Blending!</a>
+                        </div>
+                        <div class="col s4">
+                            <a class="waves-effect waves-light btn-large"><i class="material-icons left">block</i>Cancel</a>
+                        </div>
                     </div>
                 </div>
             </div>
