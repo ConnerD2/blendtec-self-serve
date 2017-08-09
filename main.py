@@ -5,6 +5,17 @@ from wifi import Cell, Scheme
 import json
 import serial
 
+from flask_peewee.db import Database
+from peewee import *
+
+# configure our database
+DATABASE = {
+    'name': 'smoothie.db',
+    'engine': 'peewee.SqliteDatabase',
+}
+DEBUG = True
+SECRET_KEY = 'asdfasdfasdfasdfasdf'
+
 #ser = serial.Serial('/dev/ttyUSB0')
 #ser.write('I')
 #x = ser.readline()
@@ -18,7 +29,24 @@ smflavor = {}
 smhealth = None
 
 app = Flask(__name__)
+app.config.from_object(__name__)
 sockets = Sockets(app)
+db = Database(app)
+
+class Flavor(db.Model):
+    name = TextField()
+    slot = IntegerField()
+    amount = DecimalField()
+
+class Wifi(db.Model):
+    ssid = TextField()
+    password = TextField()
+
+class Orders(db.Model):
+    timestamp = DateTimeField()
+    flavor = TextField()
+    health = BooleanField()
+    # Place anything else we may want to report about an order into this database section
 
 @app.route("/")
 def main():
