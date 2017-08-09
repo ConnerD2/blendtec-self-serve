@@ -1,11 +1,31 @@
-function startblending () {
-    $("#start").addClass("scale-out");
-    $("#start").removeClass("scale-in");
-    $("#selection").addClass("scale-in");
+function make() {
+    $.get("/make");
 }
-function sendrecipe () {
-    // Implement send Recipe TODO
-    return true;
+function rinse() {
+    $.get("/rinse");
+}
+function cancel(){
+    $.get("/cancel");
+}
+//Flavor Selection Handlers
+
+
+function setflavor(){
+    //Populate from flavor selections
+    data = [];
+    $.post("/flavor", data );
+}
+function sethealth(){
+    data = [];
+    $.post("/sethealth", data);
+}
+
+// These two accessible from admin page
+function clean(){
+    $.get("/clean");
+}
+function reset(){
+    $.get("/reset");
 }
 
 document.addEventListener("DOMContentLoaded", function() {

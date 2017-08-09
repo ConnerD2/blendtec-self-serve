@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+<div id="admin" href="#admin">
+    <h1> Super Secret Admin Controls </h1>
+    <form>
+        Wireless Networks:
+        <div class="input-field">
+            <select id="wireless">
+            </select>
+        </div>
+        <div class="input-field">
+            <i class="material-icons prefix">vpn_key</i>
+            <input id="icon_prefix" type="text" class="validate">
+            <label for="icon_prefix">Password</label>
+        </div>
+    </form>
+</div>
+<!-- Javascript goes here that gets wireless network list
+Must call this after finishing adding elements
+$('select').material_select();
+-->
+{% endblock %}

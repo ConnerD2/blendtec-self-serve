@@ -11,6 +11,9 @@ if "Ready for service" in x:
 else:
     ready = False
 
+flavor = {}
+health = None
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -38,15 +41,44 @@ def complete():
 
 @app.route("/flavor")
 def sel_flavor():
-    return "Set flavor array to: "
+    return "Set flavor array to: " + flavor
 
-@app.route("/initialize")
-def init_arduino():
-    return "{ 'status': 'init' }"
+@app.route("/sethealth")
+def set_health():
+    return " Set health to: " + health
 
 @app.route("/make")
 def make():
     ser.write('M')
-    # Parse Flavor Array here
+    # Parse Flavor Array here (flavor)
     ser.write()
     return "{ 'status' : ''}"
+
+@app.route("/take")
+def take():
+    ser.write('T')
+    return "{ 'status' : ''}"
+
+@app.route("/rinse")
+def rinse():
+    ser.write('D')
+    return "{ 'status' : ''}"
+
+@app.route("/clean")
+def clean():
+    ser.write('C')
+    return "{ 'status' : '' }"
+
+@app.route("/cancel")
+def cancel():
+    ser.write('X')
+    return "{ 'status' : '' }"
+
+@app.route("/reset")
+def reset():
+    ser.write('R')
+    return "{ 'status' : ''}"
+
+@app.route("/admin")
+def admin():
+    return render_template('admin.html')
