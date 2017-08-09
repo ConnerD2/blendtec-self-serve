@@ -33,20 +33,45 @@ app.config.from_object(__name__)
 sockets = Sockets(app)
 db = Database(app)
 
+healthproperties = {
+    'antioxidants' : 0,
+    'detox' : 0,
+    'electrolytes': 0,
+    'energy': 0,
+    'immunity': 0,
+    'oatfiber': 0,
+    'power': 0,
+}
+
+class JSONField(TextField):
+    def db_value(self, value):
+        return json.dumps(value)
+
+    def python_value(self, value):
+        if value is not None:
+            return json.loads(value)
+
 class Flavor(db.Model):
     name = TextField()
     slot = IntegerField()
     amount = DecimalField()
+    healthproperties = JSONField()
 
 class Wifi(db.Model):
     ssid = TextField()
     password = TextField()
 
-class Orders(db.Model):
+class Order(db.Model):
     timestamp = DateTimeField()
-    flavor = TextField()
+    flavor = JSONField()
     health = BooleanField()
     # Place anything else we may want to report about an order into this database section
+
+def create_tables():
+    Order.create_table()
+    Wifi.create_table()
+    Flavor.create_table()
+
 
 @app.route("/")
 def main():
@@ -114,7 +139,17 @@ def make():
     global smhealth
     print json.dumps(smflavor)
     print smhealth
-    #ser.write()
+    #Write out Blend
+    #Write out Ice
+    #Write out Water
+    #Write out flavor0
+    #Write out flavor1
+    #Write out flavor2
+    #Write out flavor3
+    #Write out flavor4
+    #Write out flavor5
+    #Write out flavor6
+    #Write out flavor7
     return "OK"
 
 @app.route("/take")
