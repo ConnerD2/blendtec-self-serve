@@ -1,0 +1,15 @@
+<flavor name>
+<button image file name>
+<flavor image file name, NO EXTENSION!, _<index>.png where "index" is the number of flavors and 5 is substituted for 6 flavors and 7 is substituted for 8 flavors will be appended!>
+<percent water>
+<percent ice>
+<antioxidants>
+<detox>
+<electrolytes>
+<energy>
+<immunity>
+<oat fiber>
+<power>
+
+<flavor name>
+...

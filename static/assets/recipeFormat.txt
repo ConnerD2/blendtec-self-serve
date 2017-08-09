@@ -1,0 +1,21 @@
+//comments are for explanation, there are no comments in actual data files
+//one recipe per file!
+<int>\n //blend mode: 
+<double>\n //percent of ice for this recipe
+<double>\n //percent of water for this recipe
+<string>\n //flavor0 name
+<double>\n //flavor0 percent of recipe
+<string>\n //flavor1 name
+<double>\n //flavor1 percent of recipe
+<string>\n //flavor2 name
+<double>\n //flavor2 percent of recipe
+<string>\n //flavor3 name
+<double>\n //flavor3 percent of recipe
+<string>\n //flavor4 name
+<double>\n //flavor4 percent of recipe
+<string>\n //flavor5 name
+<double>\n //flavor5 percent of recipe
+<string>\n //flavor6 name
+<double>\n //flavor6 percent of recipe
+<string>\n //flavor7 name
+<double>\n //flavor7 percent of recipe
