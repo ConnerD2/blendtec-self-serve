@@ -56,6 +56,7 @@ class Flavor(db.Model):
     slot = IntegerField()
     amount = DecimalField()
     healthproperties = JSONField()
+    touchimage = TextField()
 
 class Wifi(db.Model):
     ssid = TextField()
@@ -137,25 +138,47 @@ def make():
     #ser.write('M')
     global smflavor
     global smhealth
+    smtot = smflavor['ice'] + smflavor['water'] + smflavor['flavor0'][1] + smflavor['flavor1'][1] + smflavor['flavor2'][1] + smflavor['flavor3'][1] + smflavor['flavor4'][1] + smflavor['flavor5'][1] + smflavor['flavor6'][1] + smflavor['flavor7'][1]
     print json.dumps(smflavor)
     print smhealth
     #Write out Blend
+    ser.write(smflavor['blend'])
     #Write out Ice
+    ser.write(smflavor['ice']/(1.0 * smtot))
     #Write out Water
+    ser.write(smflavor['water']/(1.0 * smtot))
     #Write out flavor0
+    ser.write(smflavor['flavor0'][0])
+    ser.write(smflavor['flavor0'][1]/(1.0 * smtot))
     #Write out flavor1
+    ser.write(smflavor['flavor1'][0])
+    ser.write(smflavor['flavor1'][1]/(1.0 * smtot))
     #Write out flavor2
+    ser.write(smflavor['flavor2'][0])
+    ser.write(smflavor['flavor2'][1]/(1.0 * smtot))
     #Write out flavor3
+    ser.write(smflavor['flavor3'][0])
+    ser.write(smflavor['flavor3'][1]/(1.0 *  smtot))
     #Write out flavor4
+    ser.write(smflavor['flavor4'][0])
+    ser.write(smflavor['flavor4'][1]/(1.0 * smtot))
     #Write out flavor5
+    ser.write(smflavor['flavor5'][0])
+    ser.write(smflavor['flavor5'][1]/(1.0 * smtot))
     #Write out flavor6
+    ser.write(smflavor['flavor6'][0])
+    ser.write(smflavor['flavor6'][1]/(1.0 * smtot))
     #Write out flavor7
+    ser.write(smflavor['flavor7'][0])
+    ser.write(smflavor['flavor7'][1]/(1.0 * smtot))
+    k = ser.readline()
+    print k
     return "OK"
 
 @app.route("/take")
 def take():
     ser.write('T')
-    return "{ 'status' : ''}"
+    return "OK"
 
 @app.route("/rinse")
 def rinse():
