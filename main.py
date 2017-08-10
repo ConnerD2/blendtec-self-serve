@@ -17,10 +17,8 @@ DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
 ser = serial.Serial('/dev/ttyACM0',115200)
-#ser = serial.Serial('/dev/pts/2')
 ser.write('I')
 x = ser.readline()
-#x = "Ready for service"
 if "Ready for service" in x:
     ready = True
 else:
@@ -98,10 +96,7 @@ def blending():
 def echo_socket(ws):
     while not ws.closed:
         #Wait until serial sends complete message
-        #s = ser.readline()
-        import time
-        time.sleep(5)
-        s = 'Done'
+        s = ser.readline()
         if 'Done' in s:
             ws.send("OK")
         else:
