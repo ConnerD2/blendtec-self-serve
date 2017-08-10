@@ -16,8 +16,6 @@ DATABASE = {
 DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
-ser = serial.Serial('/dev/ttyACM0',115200,timeout=0,rtscts=0)
-ser.write('I')
 
 smflavor = {}
 smhealth = None
@@ -67,17 +65,14 @@ def create_tables():
     Wifi.create_table()
     Flavor.create_table()
 
-@sockets.route('/initialize')
-def initialize(ws):
+@sockets.route('/status')
+def status(ws):
+    ser = serial.Serial('/dev/ttyACM0',115200)
+    ser.write('I')
     while not ws.closed():
-        ser.write('I')
-        x = ser.readline()
-        if "Ready for service" in x:
-            ready = True
-            ws.send('OK')
-        else:
-            ready = False
-            ws.send('FAIL')
+        msg = ws.receive()
+        ser.write(msg)
+        ws.send(ser.readline())
 
 @app.route("/")
 def main():
@@ -94,16 +89,6 @@ def health():
 @app.route("/blending")
 def blending():
     return render_template('blending.html')
-
-@sockets.route('/status')
-def echo_socket(ws):
-    while not ws.closed:
-        #Wait until serial sends complete message
-        s = ser.readline()
-        if 'Done' in s:
-            ws.send("OK")
-        else:
-            ws.send("FAIL")
 
 @app.route("/complete")
 def complete():
@@ -142,38 +127,28 @@ def make():
     global smflavor
     global smhealth
     smtot = smflavor['ice'] + smflavor['water'] + smflavor['flavor0'][1] + smflavor['flavor1'][1] + smflavor['flavor2'][1] + smflavor['flavor3'][1] + smflavor['flavor4'][1] + smflavor['flavor5'][1] + smflavor['flavor6'][1] + smflavor['flavor7'][1]
-    print json.dumps(smflavor)
-    print smhealth
-    #Write out Blend
-    ser.write(str(smflavor['blend']) + '\n')
-    #Write out Ice
-    ser.write(str(smflavor['ice']/(1.0 * smtot)) + '\n')
-    #Write out Water
-    ser.write(str(smflavor['water']/(1.0 * smtot)) + '\n')
     #Write out flavor0
-    ser.write(smflavor['flavor0'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor0'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor1
-    ser.write(smflavor['flavor1'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor1'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor2
-    ser.write(smflavor['flavor2'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor2'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor3
-    ser.write(smflavor['flavor3'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor3'][1]/(1.0 *  smtot) * 37.5) + '\n')
     #Write out flavor4
-    ser.write(smflavor['flavor4'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor4'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor5
-    ser.write(smflavor['flavor5'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor5'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor6
-    ser.write(smflavor['flavor6'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor6'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor7
-    ser.write(smflavor['flavor7'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor7'][1]/(1.0 * smtot) * 37.5) + '\n')
+    #Write out Water
+    ser.write(str(smflavor['water']/(1.0 * smtot)) + '\n')
+    #Write out Ice
+    ser.write(str(smflavor['ice']/(1.0 * smtot)) + '\n')
+    #Write out Blend
+    ser.write(str(smflavor['blend']) + '\n')
     k = ser.readline()
     print k
     return "OK"
