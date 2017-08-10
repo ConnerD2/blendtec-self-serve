@@ -4,6 +4,7 @@ from flask_sockets import Sockets
 from wifi import Cell, Scheme
 import json
 import serial
+from datetime import datetime
 
 from flask_peewee.db import Database
 from peewee import *
@@ -16,26 +17,12 @@ DATABASE = {
 DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
-ser = serial.Serial('/dev/ttyACM0',115200)
+#ser = serial.Serial('/dev/ttyACM0',115200)
+ser = serial.Serial('/dev/pts/2')
 ser.write('I')
 
 smflavor = {}
 smhealth = None
-
-app = Flask(__name__)
-app.config.from_object(__name__)
-sockets = Sockets(app)
-db = Database(app)
-
-healthproperties = {
-    'antioxidants' : 0,
-    'detox' : 0,
-    'electrolytes': 0,
-    'energy': 0,
-    'immunity': 0,
-    'oatfiber': 0,
-    'power': 0,
-}
 
 class JSONField(TextField):
     def db_value(self, value):
@@ -44,6 +31,12 @@ class JSONField(TextField):
     def python_value(self, value):
         if value is not None:
             return json.loads(value)
+
+
+app = Flask(__name__)
+app.config.from_object(__name__)
+sockets = Sockets(app)
+db = Database(app)
 
 class Flavor(db.Model):
     name = TextField()
@@ -59,13 +52,25 @@ class Wifi(db.Model):
 class Order(db.Model):
     timestamp = DateTimeField()
     flavor = JSONField()
-    health = BooleanField()
     # Place anything else we may want to report about an order into this database section
 
 def create_tables():
     Order.create_table()
     Wifi.create_table()
     Flavor.create_table()
+
+#create_tables()
+
+healthproperties = {
+    'antioxidants' : 0,
+    'detox' : 0,
+    'electrolytes': 0,
+    'energy': 0,
+    'immunity': 0,
+    'oatfiber': 0,
+    'power': 0,
+}
+
 
 @sockets.route('/status')
 def status(ws):
@@ -120,13 +125,11 @@ def set_health():
 
 @app.route("/make")
 def make():
-    #This creates a new record of this order in the database
-    #Order.create(timestamp = datetime.utcnow(), flavor = smflavor, health = smhealth)
-    ser.write('M\n')
     global smflavor
-    global smhealth
+    #This creates a new record of this order in the database
+    Order.create(timestamp = datetime.utcnow(), flavor = smflavor)
+    ser.write('M\n')
     smtot = smflavor['flavor0'][1] + smflavor['flavor1'][1] + smflavor['flavor2'][1] + smflavor['flavor3'][1] + smflavor['flavor4'][1] + smflavor['flavor5'][1] + smflavor['flavor6'][1] + smflavor['flavor7'][1]
-    print smtot
     #Write out flavor0
     ser.write(str(smflavor['flavor0'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor1
