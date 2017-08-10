@@ -17,8 +17,8 @@ DATABASE = {
 DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
-ser = serial.Serial('/dev/ttyACM0',115200)
-#ser = serial.Serial('/dev/pts/3')
+#ser = serial.Serial('/dev/ttyACM0',115200)
+ser = serial.Serial('/dev/pts/3')
 ser.write('I')
 
 smflavor = {}
@@ -186,7 +186,8 @@ def reset():
 
 @app.route("/admin")
 def admin():
-    return render_template('admin.html')
+    order_list = Order.select().order_by(Order.timestamp.desc()).limit(5)
+    return render_template('admin.html',order_list = order_list)
 
 @app.route("/admin/wifi")
 @app.route("/admin/wifi/<network>")
