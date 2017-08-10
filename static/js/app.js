@@ -1,7 +1,7 @@
 var flavor = new Object();
 
-flavor.blend = 0;
-flavor.ice = 0;
+flavor.blend = 3;
+flavor.ice = 50;
 flavor.water = 0;
 flavor.flavor0 = ["flavor0",0];
 flavor.flavor1 = ["flavor1",0];

@@ -1,0 +1,2 @@
+cd /opt/blendtec-smoothie
+gunicorn -k flask_sockets.worker main:app &

@@ -16,10 +16,11 @@ DATABASE = {
 DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
-ser = serial.Serial('/dev/pts/1')
+ser = serial.Serial('/dev/ttyUSB0')
+#ser = serial.Serial('/dev/pts/2')
 ser.write('I')
-x = ser.readline()
-#x = "Ready for service"
+#x = ser.readline()
+x = "Ready for service"
 if "Ready for service" in x:
     ready = True
 else:
@@ -149,28 +150,28 @@ def make():
     ser.write(str(smflavor['water']/(1.0 * smtot)) + '\n')
     #Write out flavor0
     ser.write(smflavor['flavor0'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor0'][1]/(1.0 * smtot)) + '\n')
+    ser.write(str(smflavor['flavor0'][1]/(1.0 * smtot) * 50) + '\n')
     #Write out flavor1
     ser.write(smflavor['flavor1'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor1'][1]/(1.0 * smtot)) + '\n')
+    ser.write(str(smflavor['flavor1'][1]/(1.0 * smtot) * 50) + '\n')
     #Write out flavor2
     ser.write(smflavor['flavor2'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor2'][1]/(1.0 * smtot)) + '\n')
+    ser.write(str(smflavor['flavor2'][1]/(1.0 * smtot) * 50) + '\n')
     #Write out flavor3
     ser.write(smflavor['flavor3'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor3'][1]/(1.0 *  smtot)) + '\n')
+    ser.write(str(smflavor['flavor3'][1]/(1.0 *  smtot) * 50) + '\n')
     #Write out flavor4
     ser.write(smflavor['flavor4'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor4'][1]/(1.0 * smtot)) + '\n')
+    ser.write(str(smflavor['flavor4'][1]/(1.0 * smtot) * 50) + '\n')
     #Write out flavor5
     ser.write(smflavor['flavor5'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor5'][1]/(1.0 * smtot)) + '\n')
+    ser.write(str(smflavor['flavor5'][1]/(1.0 * smtot) * 50) + '\n')
     #Write out flavor6
     ser.write(smflavor['flavor6'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor6'][1]/(1.0 * smtot)) + '\n')
+    ser.write(str(smflavor['flavor6'][1]/(1.0 * smtot) * 50) + '\n')
     #Write out flavor7
     ser.write(smflavor['flavor7'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor7'][1]/(1.0 * smtot)) + '\n')
+    ser.write(str(smflavor['flavor7'][1]/(1.0 * smtot) * 50) + '\n')
     k = ser.readline()
     print k
     return "OK"
