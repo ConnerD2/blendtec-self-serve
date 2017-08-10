@@ -18,7 +18,7 @@ DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
 #ser = serial.Serial('/dev/ttyACM0',115200)
-ser = serial.Serial('/dev/pts/2')
+ser = serial.Serial('/dev/pts/3')
 ser.write('I')
 
 smflavor = {}
@@ -76,7 +76,8 @@ healthproperties = {
 def status(ws):
     ser.write('I')
     while not ws.closed:
-        ws.send(ser.readline())
+        x = ser.readline()
+        ws.send(x)
 
 @app.route("/")
 def main():

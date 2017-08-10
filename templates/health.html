@@ -2,22 +2,22 @@
 {% block body %}
 <div id="health" href="#health"> <!-- Select Healthiness -->
     <div class="row">
-        <div class="col s4 center-align">
+        <div class="col center-align">
             <a class="waves-effect waves-light btn-large" onclick="sethealth('yes')"><i class="material-icons left">thumb_up</i>Healthy!</a>
         </div>
-        <div class="col s4 center-align">
+        <div class="col center-align">
             <a class="waves-effect waves-light btn-large" onclick="sethealth('mix')"><i class="material-icons left">compare_arrows</i>Mix it up!</a>
         </div>
-        <div class="col s4 center-align">
+        <div class="col center-align">
             <a class="waves-effect waves-light btn-large" onclick="sethealth('no')"><i class="material-icons left">thumb_down</i>Nah!</a>
         </div>
     </div>
     <div class="row"> <!-- Controls -->
-        <div class="col s6 center-align">
-            <a style="margin: auto;" class="waves-effect waves-light btn-large" href="/blending" data-next="blending" data-prev="select"><i class="material-icons left">whatshot</i>Pick Some Flavors!</a>
+        <div class="col center-align">
+            <a style="margin: auto;" class="waves-effect waves-light btn-large" href="/selection" data-next="selection" data-prev="index"><i class="material-icons left">whatshot</i>Pick Some Flavors!</a>
         </div>
-        <div class="col s6 center-align">
-            <a class="waves-effect waves-light btn-large" href="/" onclick="cancel()" data-next="index" data-prev="select"><i class="material-icons left">block</i>Cancel</a>
+        <div class="col center-align">
+            <a class="waves-effect waves-light btn-large" href="/" onclick="cancel()" data-next="index" data-prev="index"><i class="material-icons left">block</i>Cancel</a>
         </div>
     </div>
 </div>

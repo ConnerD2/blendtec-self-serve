@@ -56,14 +56,4 @@
         </div>
     </div>
 </div>
-    <script type="text/javascript">
-var socket = new WebSocket("ws://localhost:8000/status");
- socket.onmessage = function(msg){
-    if(msg.data.includes("Done")){
-        window.location.href = "/complete";
-    }
-    else {
-    }
- }
-</script>
 {% endblock %}
