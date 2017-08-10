@@ -67,7 +67,7 @@ def create_tables():
     Wifi.create_table()
     Flavor.create_table()
 
-@sockets.route('/status')
+@sockets.route('/initialize')
 def initialize(ws):
     while not ws.closed():
         ser.write('I')
@@ -150,19 +150,20 @@ def make():
     ser.write(str(smflavor['water']/(1.0 * smtot)) + '\n')
     #Write out flavor0
     ser.write(smflavor['flavor0'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor0'][1]/(1.0 * smtot) * 50) + '\n')
+    ser.write(str(smflavor['flavor0'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor1
     ser.write(smflavor['flavor1'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor1'][1]/(1.0 * smtot) * 50) + '\n')
+    ser.write(str(smflavor['flavor1'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor2
     ser.write(smflavor['flavor2'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor2'][1]/(1.0 * smtot) * 50) + '\n')
+    ser.write(str(smflavor['flavor2'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor3
     ser.write(smflavor['flavor3'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor3'][1]/(1.0 *  smtot) * 50) + '\n')
+    ser.write(str(smflavor['flavor3'][1]/(1.0 *  smtot) * 37.5) + '\n')
     #Write out flavor4
     ser.write(smflavor['flavor4'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor4'][1]/(1.0 * smtot) * 50) + '\n')
+    ser.write(str(smflavor['flavor4'][1]/(1.0 * smtot) * 37.5) + '\n')
+    #These are actually the ones that control the healthy/nah problem
     #Write out flavor5
     ser.write(smflavor['flavor5'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor5'][1]/(1.0 * smtot) * 50) + '\n')
