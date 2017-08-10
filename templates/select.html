@@ -18,7 +18,7 @@
             <h3> Select Ingredients </h3>
         </center>
     </div>
-    <div class="row"> <!-- Ingredient Selection -->
+    <div class="row"> <!-- Ingredient Selection, this is disabled if Healthy was chosen-->
         <h4> Individual </h4>
         <div class="col center-align" onclick="addBanana()"><img src="{{ url_for('static', filename='assets/icon_cup_banana.png') }}" /> Sunny Banana</div>
         <div class="col center-align" onclick="addWatermelon()"><img src="{{ url_for('static', filename='assets/icon_cup_watermelon.png') }}" /> Wild Watermelon</div>
@@ -26,7 +26,7 @@
         <div class="col center-align" onclick="addStrawberry()"><img src="{{ url_for('static', filename='assets/icon_cup_strawberry.png') }}" /> Summer Strawberry</div>
         <div class="col center-align" onclick="addPineapple()"><img src="{{ url_for('static', filename='assets/icon_cup_pineapple.png') }}" /> Pure Pineapple</div>
     </div>
-    <div class="row"> <!-- Pre-Blends -->
+    <div class="row"> <!-- Pre-Blends, this is disabled if Nah was chosen -->
         <h4> Pre-Blends </h4>
         <div class="col s4 center-align" onclick="setBloomingBerry()"><img src="{{ url_for('static', filename='assets/icon_cup_blooming_berry.png') }}" /> Blooming Berry</div>
         <div class="col s4 center-align" onclick="setHarvestGreens()"><img src="{{ url_for('static', filename='assets/icon_cup_harvest_green.png') }}" /> Harvest Greens</div>
@@ -37,7 +37,7 @@
             <a class="waves-effect waves-light btn-large" onclick="resetrecipe()"><i class="material-icons left">autorenew</i>Reset</a>
         </div>
         <div class="col s4 center-align">
-            <a style="margin: auto;" class="waves-effect waves-light btn-large" onclick="setflavor()" href="/health"><i class="material-icons left">whatshot</i>Onward!</a>
+            <a style="margin: auto;" class="waves-effect waves-light btn-large" onclick="make()" href="/blending"><i class="material-icons left">whatshot</i>Start Blending!</a>
         </div>
         <div class="col s4 center-align">
             <a class="waves-effect waves-light btn-large" href="/" onclick="cancel()"><i class="material-icons left">block</i>Cancel</a>

@@ -28,7 +28,9 @@
 var socket = new WebSocket("ws://localhost:8000/initialize");
  socket.onmessage = function(msg){
     if(msg.data == "OK"){
-        document.getElementByID("go").classList.remove("disabled");
+        elem = document.getElementByID("go");
+        elem.classList.remove("disabled");
+        alert('We good fam!');
     }
     else {
     }

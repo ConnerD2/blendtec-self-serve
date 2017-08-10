@@ -63,8 +63,8 @@ function updateCup(){
         $("#none").hide();
         $("#ingredientsbody").append(`
             <tr>
-                <td>Flavor5</td>
-                <td>flavor.flavor0[1]</td>
+                <td>Blooming Berry</td>
+                <td>${flavor.flavor5[1]}</td>
             </tr>
         `);
     }
@@ -72,8 +72,8 @@ function updateCup(){
         $("#none").hide();
         $("#ingredientsbody").append(`
             <tr>
-                <td>Banana</td>
-                <td>flavor.flavor0[1]</td>
+                <td>Harvest Greens</td>
+                <td>${flavor.flavor6[1]}</td>
             </tr>
         `);
     }
@@ -81,8 +81,8 @@ function updateCup(){
         $("#none").hide();
         $("#ingredientsbody").append(`
             <tr>
-                <td>Banana</td>
-                <td>flavor.flavor0[1]</td>
+                <td>Superfruit All-Star</td>
+                <td>${flavor.flavor7[1]}</td>
             </tr>
         `);
     }
@@ -109,6 +109,7 @@ function take(){
 }
 
 function make() {
+    setflavor();
     $.get("/make");
 }
 function rinse() {
@@ -144,47 +145,17 @@ function addPineapple() {
 }
 
 function setBloomingBerry(){
-    flavor.blend = 0;
-    flavor.ice = 0;
-    flavor.water = 0;
-    flavor.flavor0 = ["flavor0",0];
-    flavor.flavor1 = ["flavor1",0];
-    flavor.flavor2 = ["flavor2",0];
-    flavor.flavor3 = ["flavor3",0];
-    flavor.flavor4 = ["flavor4",0];
-    flavor.flavor5 = ["flavor5",0];
-    flavor.flavor6 = ["flavor6",0];
-    flavor.flavor7 = ["flavor7",0];
+    flavor.flavor5[1] += 1;
     updateCup();
 }
 
 function setHarvestGreens(){
-    flavor.blend = 0;
-    flavor.ice = 0;
-    flavor.water = 0;
-    flavor.flavor0 = ["flavor0",0];
-    flavor.flavor1 = ["flavor1",0];
-    flavor.flavor2 = ["flavor2",0];
-    flavor.flavor3 = ["flavor3",0];
-    flavor.flavor4 = ["flavor4",0];
-    flavor.flavor5 = ["flavor5",0];
-    flavor.flavor6 = ["flavor6",0];
-    flavor.flavor7 = ["flavor7",0];
+    flavor.flavor6[1] += 1;
     updateCup();
 }
 
 function setSuperfruit(){
-    flavor.blend = 0;
-    flavor.ice = 0;
-    flavor.water = 0;
-    flavor.flavor0 = ["flavor0",0];
-    flavor.flavor1 = ["flavor1",0];
-    flavor.flavor2 = ["flavor2",0];
-    flavor.flavor3 = ["flavor3",0];
-    flavor.flavor4 = ["flavor4",0];
-    flavor.flavor5 = ["flavor5",0];
-    flavor.flavor6 = ["flavor6",0];
-    flavor.flavor7 = ["flavor7",0];
+    flavor.flavor7[1] += 1;
     updateCup();
 }
 

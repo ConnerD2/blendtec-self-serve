@@ -16,7 +16,7 @@ DATABASE = {
 DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
-ser = serial.Serial('/dev/ttyACM0',115200)
+ser = serial.Serial('/dev/ttyACM0',115200,timeout=0,rtscts=0)
 ser.write('I')
 
 smflavor = {}
@@ -74,14 +74,14 @@ def initialize(ws):
         x = ser.readline()
         if "Ready for service" in x:
             ready = True
-	    ws.send('OK')	
+            ws.send('OK')
         else:
             ready = False
             ws.send('FAIL')
 
 @app.route("/")
 def main():
-        return render_template('index.html')
+    return render_template('index.html')
 
 @app.route("/selection")
 def selector():
@@ -126,6 +126,8 @@ def set_health():
         global smhealth
         if localhealth['health'] == "yes":
             smhealth = True
+        if localhealth['health'] == "mix":
+            smhealth = None
         if localhealth['health'] == "no":
             smhealth = False
         return "Set Health to: " + str(smhealth)
@@ -163,16 +165,15 @@ def make():
     #Write out flavor4
     ser.write(smflavor['flavor4'][0].encode('ascii', 'ignore') + '\n')
     ser.write(str(smflavor['flavor4'][1]/(1.0 * smtot) * 37.5) + '\n')
-    #These are actually the ones that control the healthy/nah problem
     #Write out flavor5
     ser.write(smflavor['flavor5'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor5'][1]/(1.0 * smtot) * 50) + '\n')
+    ser.write(str(smflavor['flavor5'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor6
     ser.write(smflavor['flavor6'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor6'][1]/(1.0 * smtot) * 50) + '\n')
+    ser.write(str(smflavor['flavor6'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor7
     ser.write(smflavor['flavor7'][0].encode('ascii', 'ignore') + '\n')
-    ser.write(str(smflavor['flavor7'][1]/(1.0 * smtot) * 50) + '\n')
+    ser.write(str(smflavor['flavor7'][1]/(1.0 * smtot) * 37.5) + '\n')
     k = ser.readline()
     print k
     return "OK"
@@ -223,7 +224,7 @@ def wifi(network=None):
         wirelesslist = []
         for i in iwlist:
             wirelesslist.append(i.ssid)
-        return json.dumps(wirelesslist)
+            return json.dumps(wirelesslist)
         #Demo version
         #return json.dumps(["BlendTec1","CustomerWifi","BillWiTheScienceFi"])
 
