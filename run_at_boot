@@ -1,2 +1,5 @@
+#!/bin/bash
+echo "I'm starting!"
 cd /opt/blendtec-smoothie
-gunicorn -k flask_sockets.worker main:app &
+gunicorn -k flask_sockets.worker main:app -D
+chromium-browser --kiosk http://localhost:8000

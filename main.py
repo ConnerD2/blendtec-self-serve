@@ -16,11 +16,11 @@ DATABASE = {
 DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
-ser = serial.Serial('/dev/ttyUSB0')
+ser = serial.Serial('/dev/ttyACM0',115200)
 #ser = serial.Serial('/dev/pts/2')
 ser.write('I')
-#x = ser.readline()
-x = "Ready for service"
+x = ser.readline()
+#x = "Ready for service"
 if "Ready for service" in x:
     ready = True
 else:
