@@ -17,8 +17,8 @@ DATABASE = {
 DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
-#ser = serial.Serial('/dev/ttyACM0',115200)
-ser = serial.Serial('/dev/pts/3')
+ser = serial.Serial('/dev/ttyACM0',115200)
+#ser = serial.Serial('/dev/pts/3')
 ser.write('I')
 
 smflavor = {}
