@@ -16,6 +16,9 @@ DATABASE = {
 DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
+#ser = serial.Serial('/dev/ttyACM0',115200)
+ser = serial.Serial('/dev/pts/2')
+ser.write('I')
 
 smflavor = {}
 smhealth = None
@@ -67,11 +70,8 @@ def create_tables():
 
 @sockets.route('/status')
 def status(ws):
-    ser = serial.Serial('/dev/ttyACM0',115200)
     ser.write('I')
-    while not ws.closed():
-        msg = ws.receive()
-        ser.write(msg)
+    while not ws.closed:
         ws.send(ser.readline())
 
 @app.route("/")
@@ -123,10 +123,11 @@ def set_health():
 def make():
     #This creates a new record of this order in the database
     #Order.create(timestamp = datetime.utcnow(), flavor = smflavor, health = smhealth)
-    ser.write('M')
+    ser.write('M\n')
     global smflavor
     global smhealth
-    smtot = smflavor['ice'] + smflavor['water'] + smflavor['flavor0'][1] + smflavor['flavor1'][1] + smflavor['flavor2'][1] + smflavor['flavor3'][1] + smflavor['flavor4'][1] + smflavor['flavor5'][1] + smflavor['flavor6'][1] + smflavor['flavor7'][1]
+    smtot = smflavor['flavor0'][1] + smflavor['flavor1'][1] + smflavor['flavor2'][1] + smflavor['flavor3'][1] + smflavor['flavor4'][1] + smflavor['flavor5'][1] + smflavor['flavor6'][1] + smflavor['flavor7'][1]
+    print smtot
     #Write out flavor0
     ser.write(str(smflavor['flavor0'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out flavor1
@@ -144,13 +145,11 @@ def make():
     #Write out flavor7
     ser.write(str(smflavor['flavor7'][1]/(1.0 * smtot) * 37.5) + '\n')
     #Write out Water
-    ser.write(str(smflavor['water']/(1.0 * smtot)) + '\n')
+    ser.write(str(smflavor['water']) + '\n')
     #Write out Ice
-    ser.write(str(smflavor['ice']/(1.0 * smtot)) + '\n')
+    ser.write(str(smflavor['ice']) + '\n')
     #Write out Blend
     ser.write(str(smflavor['blend']) + '\n')
-    k = ser.readline()
-    print k
     return "OK"
 
 @app.route("/take")
