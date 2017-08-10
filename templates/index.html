@@ -20,8 +20,18 @@
     <br>
     <div class="row"> <!-- Start Blending Button -->
         <center>
-            <a style="margin: auto;" class="waves-effect waves-light btn-large" href="/selection" onclick="take()"><i class="material-icons left">whatshot</i>Start Blending!</a>
+            <a id="go" style="margin: auto;" class="waves-effect waves-light btn-large disabled" href="/selection" onclick="take()"><i class="material-icons left">whatshot</i>Start Blending!</a>
         </center>
     </div>
 </div>
+    <script type="text/javascript">
+var socket = new WebSocket("ws://localhost:8000/initialize");
+ socket.onmessage = function(msg){
+    if(msg.data == "OK"){
+        document.getElementByID("go").classList.remove("disabled");
+    }
+    else {
+    }
+ }
+</script>
 {% endblock %}

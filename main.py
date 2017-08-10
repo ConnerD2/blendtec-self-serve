@@ -18,11 +18,6 @@ SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
 ser = serial.Serial('/dev/ttyACM0',115200)
 ser.write('I')
-x = ser.readline()
-if "Ready for service" in x:
-    ready = True
-else:
-    ready = False
 
 smflavor = {}
 smhealth = None
@@ -72,13 +67,21 @@ def create_tables():
     Wifi.create_table()
     Flavor.create_table()
 
+@sockets.route('/status')
+def initialize(ws):
+    while not ws.closed():
+        ser.write('I')
+        x = ser.readline()
+        if "Ready for service" in x:
+            ready = True
+	    ws.send('OK')	
+        else:
+            ready = False
+            ws.send('FAIL')
 
 @app.route("/")
 def main():
-    if ready == True:
         return render_template('index.html')
-    else:
-        return "Error: " + x
 
 @app.route("/selection")
 def selector():
