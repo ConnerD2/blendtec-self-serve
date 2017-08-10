@@ -131,6 +131,8 @@ def set_health():
 
 @app.route("/make")
 def make():
+    #This creates a new record of this order in the database
+    #Order.create(timestamp = datetime.utcnow(), flavor = smflavor, health = smhealth)
     ser.write('M')
     global smflavor
     global smhealth
@@ -213,11 +215,13 @@ def wifi(network=None):
         #Connect to network here
     else:
         #Get list of WiFi networks, print here
-        #iwlist = Cell.all('wlan0')
-        #wirelesslist = []
-        #for i in iwlist:
-        #    wirelesslist.append(i.ssid)
-        return json.dumps(["BlendTec1","CustomerWifi","BillWiTheScienceFi"])
+        iwlist = Cell.all('wlan0')
+        wirelesslist = []
+        for i in iwlist:
+            wirelesslist.append(i.ssid)
+        return json.dumps(wirelesslist)
+        #Demo version
+        #return json.dumps(["BlendTec1","CustomerWifi","BillWiTheScienceFi"])
 
 if __name__ == "__main__":
     from gevent import pywsgi
