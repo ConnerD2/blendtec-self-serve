@@ -81,7 +81,7 @@ function updateCup(){
         $("#none").hide();
         $("#ingredientsbody").append(`
             <tr>
-                <td>Superfruit All-Star</td>
+                <td>Tropical Harmony</td>
                 <td>${flavor.flavor7[1]}</td>
             </tr>
         `);
@@ -90,17 +90,17 @@ function updateCup(){
 }
 
 function resetrecipe(){
-    flavor.blend = 0;
-    flavor.ice = 0;
-    flavor.water = 0;
-    flavor.flavor0 = ["flavor0",0];
-    flavor.flavor1 = ["flavor1",0];
-    flavor.flavor2 = ["flavor2",0];
-    flavor.flavor3 = ["flavor3",0];
-    flavor.flavor4 = ["flavor4",0];
-    flavor.flavor5 = ["flavor5",0];
-    flavor.flavor6 = ["flavor6",0];
-    flavor.flavor7 = ["flavor7",0];
+flavor.blend = 3;
+flavor.ice = 63;
+flavor.water = 0;
+flavor.flavor0 = ["flavor0",0];
+flavor.flavor1 = ["flavor1",0];
+flavor.flavor2 = ["flavor2",0];
+flavor.flavor3 = ["flavor3",0];
+flavor.flavor4 = ["flavor4",0];
+flavor.flavor5 = ["flavor5",0];
+flavor.flavor6 = ["flavor6",0];
+flavor.flavor7 = ["flavor7",0];
     updateCup();
 }
 
