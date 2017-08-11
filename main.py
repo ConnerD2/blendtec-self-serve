@@ -32,7 +32,7 @@ class JSONField(TextField):
         if value is not None:
             return json.loads(value)
 
-
+mult = 4 #This is a small cup
 app = Flask(__name__)
 app.config.from_object(__name__)
 sockets = Sockets(app)
@@ -129,30 +129,9 @@ def make():
     global smflavor
     #This creates a new record of this order in the database
     Order.create(timestamp = datetime.utcnow(), flavor = smflavor)
-    ser.write('M\n')
     smtot = smflavor['flavor0'][1] + smflavor['flavor1'][1] + smflavor['flavor2'][1] + smflavor['flavor3'][1] + smflavor['flavor4'][1] + smflavor['flavor5'][1] + smflavor['flavor6'][1] + smflavor['flavor7'][1]
-    #Write out flavor0
-    ser.write(str(smflavor['flavor0'][1]/(1.0 * smtot) * 37.5) + '\n')
-    #Write out flavor1
-    ser.write(str(smflavor['flavor1'][1]/(1.0 * smtot) * 37.5) + '\n')
-    #Write out flavor2
-    ser.write(str(smflavor['flavor2'][1]/(1.0 * smtot) * 37.5) + '\n')
-    #Write out flavor3
-    ser.write(str(smflavor['flavor3'][1]/(1.0 *  smtot) * 37.5) + '\n')
-    #Write out flavor4
-    ser.write(str(smflavor['flavor4'][1]/(1.0 * smtot) * 37.5) + '\n')
-    #Write out flavor5
-    ser.write(str(smflavor['flavor5'][1]/(1.0 * smtot) * 37.5) + '\n')
-    #Write out flavor6
-    ser.write(str(smflavor['flavor6'][1]/(1.0 * smtot) * 37.5) + '\n')
-    #Write out flavor7
-    ser.write(str(smflavor['flavor7'][1]/(1.0 * smtot) * 37.5) + '\n')
-    #Write out Water
-    ser.write(str(smflavor['water']) + '\n')
-    #Write out Ice
-    ser.write(str(smflavor['ice']) + '\n')
-    #Write out Blend
-    ser.write(str(smflavor['blend']) + '\n')
+    ser.write('M ' + str(smflavor['flavor0'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor1'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor2'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor3'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor4'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor5'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor6'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor7'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['water'] * mult) + ' ' + str(smflavor['ice'] * mult) + '\n')
+    #ser.write(str(smflavor['blend']) + ' ')
     return "OK"
 
 @app.route("/take")
