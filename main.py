@@ -32,7 +32,11 @@ class JSONField(TextField):
         if value is not None:
             return json.loads(value)
 
-mult = 4 #This is a small cup
+cupmultiplier = 4.5
+productpercent = 20
+icepercent = 80
+waterpercent = 0
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 sockets = Sockets(app)
@@ -129,9 +133,27 @@ def make():
     global smflavor
     #This creates a new record of this order in the database
     Order.create(timestamp = datetime.utcnow(), flavor = smflavor)
-    smtot = smflavor['flavor0'][1] + smflavor['flavor1'][1] + smflavor['flavor2'][1] + smflavor['flavor3'][1] + smflavor['flavor4'][1] + smflavor['flavor5'][1] + smflavor['flavor6'][1] + smflavor['flavor7'][1]
-    ser.write('M ' + str(smflavor['flavor0'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor1'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor2'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor3'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor4'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor5'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor6'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor7'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['water'] * mult) + ' ' + str(smflavor['ice'] * mult) + '\n')
-    #ser.write(str(smflavor['blend']) + ' ')
+    f1 = smflavor['flavor0'][1]
+    f2 = smflavor['flavor1'][1]
+    f3 = smflavor['flavor2'][1]
+    f4 = smflavor['flavor3'][1]
+    f5 = smflavor['flavor4'][1]
+    f6 = smflavor['flavor5'][1]
+    f7 = smflavor['flavor6'][1]
+    f8 = smflavor['flavor7'][1]
+    smtot = f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8
+    f1 = int(floor((f1/smtot) * productpercent * cupmultiplier))
+    f2 = int(floor((f2/smtot) * productpercent * cupmultiplier))
+    f3 = int(floor((f3/smtot) * productpercent * cupmultiplier))
+    f4 = int(floor((f4/smtot) * productpercent * cupmultiplier))
+    f5 = int(floor((f5/smtot) * productpercent * cupmultiplier))
+    f6 = int(floor((f6/smtot) * productpercent * cupmultiplier))
+    f7 = int(floor((f7/smtot) * productpercent * cupmultiplier))
+    f8 = int(floor((f8/smtot) * productpercent * cupmultiplier))
+    ice = int(floor(smflavor['ice'] * icepercent * cupmultiplier))
+    water = int(floor(smflavor['water'] * waterpercent * cupmultiplier))
+    blend = smflavor['blend']
+    ser.write('M ' + str(f1) + ' ' + str(f2) + ' ' + str(f3) + ' ' + str(f4) + ' ' + str(f5) + ' ' + str(f6) + ' ' + str(f7) + ' ' + str(f8) + ' ' + str(water) + ' ' + str(ice) + ' ' + str(blend) + '\n')
     return "OK"
 
 @app.route("/take")
