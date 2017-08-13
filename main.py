@@ -32,7 +32,7 @@ class JSONField(TextField):
         if value is not None:
             return json.loads(value)
 
-mult = 4 #This is a small cup
+mult = 5 #This is a small cup
 app = Flask(__name__)
 app.config.from_object(__name__)
 sockets = Sockets(app)
@@ -130,7 +130,7 @@ def make():
     #This creates a new record of this order in the database
     Order.create(timestamp = datetime.utcnow(), flavor = smflavor)
     smtot = smflavor['flavor0'][1] + smflavor['flavor1'][1] + smflavor['flavor2'][1] + smflavor['flavor3'][1] + smflavor['flavor4'][1] + smflavor['flavor5'][1] + smflavor['flavor6'][1] + smflavor['flavor7'][1]
-    ser.write('M ' + str(smflavor['flavor0'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor1'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor2'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor3'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor4'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor5'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor6'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['flavor7'][1]/(smtot) * 37 * mult) + ' ' + str(smflavor['water'] * mult) + ' ' + str(smflavor['ice'] * mult) + '\n')
+    ser.write('M ' + str(smflavor['flavor0'][1]/(smtot) * 32 * mult) + ' ' + str(smflavor['flavor1'][1]/(smtot) * 32 * mult) + ' ' + str(smflavor['flavor2'][1]/(smtot) * 32 * mult) + ' ' + str(smflavor['flavor3'][1]/(smtot) * 32 * mult) + ' ' + str(smflavor['flavor4'][1]/(smtot) * 32 * mult) + ' ' + str(smflavor['flavor5'][1]/(smtot) * 32 * mult) + ' ' + str(smflavor['flavor6'][1]/(smtot) * 32 * mult) + ' ' + str(smflavor['flavor7'][1]/(smtot) * 32 * mult) + ' ' + str(smflavor['water'] * mult) + ' ' + str(smflavor['ice'] * mult) + '\n')
     #ser.write(str(smflavor['blend']) + ' ')
     return "OK"
 

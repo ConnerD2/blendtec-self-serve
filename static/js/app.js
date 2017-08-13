@@ -1,7 +1,7 @@
 var flavor = new Object();
 
 flavor.blend = 3;
-flavor.ice = 63;
+flavor.ice = 68;
 flavor.water = 0;
 flavor.flavor0 = ["flavor0",0];
 flavor.flavor1 = ["flavor1",0];
@@ -27,7 +27,7 @@ function updateCup(){
         $("#none").hide();
         $("#ingredientsbody").append(`
             <tr>
-                <td>Watermelon</td>
+                <td>Blooming Berry</td>
                 <td>${flavor.flavor1[1]}</td>
             </tr>
         `);
@@ -36,7 +36,7 @@ function updateCup(){
         $("#none").hide();
         $("#ingredientsbody").append(`
             <tr>
-                <td>Mango</td>
+                <td>Blooming Berry</td>
                 <td>${flavor.flavor2[1]}</td>
             </tr>
         `);
@@ -145,7 +145,7 @@ function addPineapple() {
 }
 
 function setBloomingBerry(){
-    flavor.flavor5[1] += 1;
+    flavor.flavor1[1] += 1;
     updateCup();
 }
 
