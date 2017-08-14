@@ -28,7 +28,7 @@
         <div class="col center-align" onclick="addPineapple()"><img src="{{ url_for('static', filename='assets/icon_cup_pineapple.png') }}" /> Pure Pineapple</div>
     </div>
     {% endif %}
-    <div class="row"> <!-- Pre-Blends, this is disabled if Nah was chosen -->
+    <div class="row"> <!-- Pre-Blends, this is disabled if Nah was chosen TODO: change this to iterate over from database-->
         <!--        <h4> Healthy Choice Ingredients </h4>-->
         <div class="col s4 center-align" onclick="setBloomingBerry()"><img src="{{ url_for('static', filename='assets/icon_cup_blooming_berry.png') }}" /> <br>Blooming Berry</div>
         <div class="col s4 center-align" onclick="setHarvestGreens()"><img src="{{ url_for('static', filename='assets/icon_cup_harvest_green.png') }}" /> <br>Harvest Greens</div>
@@ -46,4 +46,84 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+
+function updateCup(){
+    $("#ingredientsbody").html("");
+    if(flavor.flavor0[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Banana</td>
+                <td>${flavor.flavor0[1]}</td>
+            </tr>
+        `);
+        //TODO: replace Banana with flavor from database
+    }
+    if(flavor.flavor1[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Blooming Berry</td>
+                <td>${flavor.flavor1[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor2[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Blooming Berry</td>
+                <td>${flavor.flavor2[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor3[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Strawberry</td>
+                <td>${flavor.flavor3[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor4[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Pineapple</td>
+                <td>${flavor.flavor4[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor5[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Blooming Berry</td>
+                <td>${flavor.flavor5[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor6[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Harvest Greens</td>
+                <td>${flavor.flavor6[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor7[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Tropical Harmony</td>
+                <td>${flavor.flavor7[1]}</td>
+            </tr>
+        `);
+    }
+    //Check that if there are no selections, we set none back to visible
+}
+</script>
 {% endblock %}
