@@ -142,7 +142,7 @@ def make():
     f6 = smflavor['flavor5'][1]
     f7 = smflavor['flavor6'][1]
     f8 = smflavor['flavor7'][1]
-    smtot = f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8
+    smtot = (f1 + f2 + f3 + f4 + f5 + f6 + f7 + f8) * 1.0
     f1 = int(floor((f1/smtot) * productpercent * cupmultiplier))
     f2 = int(floor((f2/smtot) * productpercent * cupmultiplier))
     f3 = int(floor((f3/smtot) * productpercent * cupmultiplier))
@@ -151,6 +151,14 @@ def make():
     f6 = int(floor((f6/smtot) * productpercent * cupmultiplier))
     f7 = int(floor((f7/smtot) * productpercent * cupmultiplier))
     f8 = int(floor((f8/smtot) * productpercent * cupmultiplier))
+    print f1
+    print f2
+    print f3
+    print f4
+    print f5
+    print f6
+    print f7
+    print f8
     ice = int(floor(smflavor['ice'] * icepercent * cupmultiplier))
     water = int(floor(smflavor['water'] * waterpercent * cupmultiplier))
     blend = smflavor['blend']
