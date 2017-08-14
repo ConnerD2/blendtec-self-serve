@@ -34,7 +34,7 @@ class JSONField(TextField):
             return json.loads(value)
 
 cupmultiplier = 4.75
-productpercent = 25
+productpercent = 38
 icepercent = 62
 waterpercent = 0
 
