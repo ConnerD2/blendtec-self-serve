@@ -35,6 +35,10 @@ var socket = new WebSocket("ws://localhost:8000/status");
     if(msg.data.includes("Done")){
         window.location.href = "/complete";
     }
+    if(msg.data.includes("no cup")){
+        window.location.href = "/";
+        alert("ERROR: No cup inserted!");
+    }
      else {
          /* TODO 
             Make this handle more conditions for the rest of the pages too
