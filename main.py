@@ -19,7 +19,7 @@ DEBUG = True
 SECRET_KEY = 'asdfasdfasdfasdfasdf'
 
 ser = serial.Serial('/dev/ttyACM0',115200)
-#ser = serial.Serial('/dev/pts/2')
+#ser = serial.Serial('/dev/pts/5')
 ser.write('I')
 
 smflavor = {}
@@ -35,7 +35,7 @@ class JSONField(TextField):
 
 cupmultiplier = 4.5
 productpercent = 20
-icepercent = 80
+icepercent = 65
 waterpercent = 0
 
 app = Flask(__name__)
