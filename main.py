@@ -151,14 +151,6 @@ def make():
     f6 = int(floor((f6/smtot) * productpercent * cupmultiplier))
     f7 = int(floor((f7/smtot) * productpercent * cupmultiplier))
     f8 = int(floor((f8/smtot) * productpercent * cupmultiplier))
-    print f1
-    print f2
-    print f3
-    print f4
-    print f5
-    print f6
-    print f7
-    print f8
     ice = int(floor(smflavor['ice'] * icepercent * cupmultiplier))
     water = int(floor(smflavor['water'] * waterpercent * cupmultiplier))
     blend = smflavor['blend']
