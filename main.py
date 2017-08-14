@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template, request
 from flask_sockets import Sockets
 from wifi import Cell, Scheme
+from math import floor
 import json
 import serial
 from datetime import datetime
