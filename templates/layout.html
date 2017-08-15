@@ -18,7 +18,7 @@
             <div class="barba-container">
                 {% block body %}
                 {% endblock %}
-        <a href= "localhost:8000/index.html">restart gui</a><button ="rinse">
+        <a href= "localhost:8000/index.html">restart gui</a><button type="button" onclick=$.ajax({url:"/rinse"})>Rinse</button>
             </div>
         </div>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
