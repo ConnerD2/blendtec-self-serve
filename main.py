@@ -33,7 +33,7 @@ class JSONField(TextField):
         if value is not None:
             return json.loads(value)
 
-cupmultiplier = 4.50
+cupmultiplier = 4.00
 productpercent = 28
 icepercent = 62
 waterpercent = 10
