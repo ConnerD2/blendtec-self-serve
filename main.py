@@ -36,7 +36,7 @@ class JSONField(TextField):
 cupmultiplier = 4.75
 productpercent = 25
 icepercent = 62
-waterpercent = 0
+waterpercent = 13
 
 app = Flask(__name__)
 app.config.from_object(__name__)
