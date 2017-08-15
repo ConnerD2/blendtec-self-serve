@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /opt/blendtec-smoothie
-gunicorn -k flask_sockets.worker main:app -D
+gunicorn -k flask_sockets.worker main:app -D --error-logfile /home/pi/blender_error_log
