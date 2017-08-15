@@ -33,10 +33,10 @@ class JSONField(TextField):
         if value is not None:
             return json.loads(value)
 
-cupmultiplier = 4.75
-productpercent = 25
+cupmultiplier = 4.50
+productpercent = 28
 icepercent = 62
-waterpercent = 13
+waterpercent = 10
 
 app = Flask(__name__)
 app.config.from_object(__name__)
