@@ -102,7 +102,7 @@ flavor.flavor4 = ["flavor4",0];
 flavor.flavor5 = ["flavor5",0];
 flavor.flavor6 = ["flavor6",0];
 flavor.flavor7 = ["flavor7",0];
-    updateCup();
+updateCup();
 }
 
 function take(){
@@ -112,6 +112,7 @@ function take(){
 function make() {
     setflavor();
     $.get("/make");
+    resetrecipe();
 }
 function rinse() {
     $.get("/rinse");
