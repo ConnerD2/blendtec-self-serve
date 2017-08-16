@@ -24,26 +24,4 @@
         </center>
     </div>
 </div>
-    <script type="text/javascript">
-var socket = new WebSocket("ws://localhost:8000/status");
- socket.onmessage = function(msg){
-    if(msg.data.includes("Ready for service")){
-        elem = document.getElementByID("go");
-        elem.classList.remove("disabled");
-        alert('We good fam!');
-    }
-    if(msg.data.includes("Done")){
-        window.location.href = "/complete";
-    }
-    if(msg.data.includes("no cup")){
-        window.location.href = "/";
-        alert("ERROR: No cup inserted!");
-    }
-     else {
-         /* TODO 
-            Make this handle more conditions for the rest of the pages too
-          */
-    }
- }
-</script>
 {% endblock %}
