@@ -107,6 +107,7 @@ updateCup();
 
 function take(){
     $.get("/take");
+    resetrecipe();
 }
 
 function make() {
