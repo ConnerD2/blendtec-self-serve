@@ -12,6 +12,83 @@ flavor.flavor5 = ["flavor5",0];
 flavor.flavor6 = ["flavor6",0];
 flavor.flavor7 = ["flavor7",0];
 
+function updateCup(){
+    $("#ingredientsbody").html("");
+    if(flavor.flavor0[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Banana</td>
+                <td>${flavor.flavor0[1]}</td>
+            </tr>
+        `);
+        //TODO: replace Banana with flavor from database
+    }
+    if(flavor.flavor1[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Blooming Berry</td>
+                <td>${flavor.flavor1[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor2[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Blooming Berry</td>
+                <td>${flavor.flavor2[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor3[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Strawberry</td>
+                <td>${flavor.flavor3[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor4[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Pineapple</td>
+                <td>${flavor.flavor4[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor5[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Blooming Berry</td>
+                <td>${flavor.flavor5[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor6[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Harvest Greens</td>
+                <td>${flavor.flavor6[1]}</td>
+            </tr>
+        `);
+    }
+    if(flavor.flavor7[1] > 0){
+        $("#none").hide();
+        $("#ingredientsbody").append(`
+            <tr>
+                <td>Tropical Harmony</td>
+                <td>${flavor.flavor7[1]}</td>
+            </tr>
+        `);
+    }
+    //Check that if there are no selections, we set none back to visible
+}
 
 function resetrecipe(){
 flavor.blend = 3;
